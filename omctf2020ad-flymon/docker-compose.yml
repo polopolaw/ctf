@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  flymon:
+    build:
+      context: ./
+      dockerfile: Dockerfile    
+    volumes:
+      - .:/home/flymon
+    restart: always
+    ports:
+      - 10000:10000
+    entrypoint: "./app.py"
+
+

@@ -1,0 +1,57 @@
+version: "3.7"
+services:
+  api:
+    image: underpost
+    container_name: underpost_api
+    hostname: underpost-api
+    build:
+      context: ./service-api
+      dockerfile: ./Dockerfile
+    environment:
+      - INIT=cond #yes|no|cond  - to init db with shelters, goods, porters. cond - do not overwrite if exists
+    volumes:
+      - ./service-api/storage/db:/opt/underpost/db
+      - ./service-api/storage/complaints/:/opt/underpost/complaints/
+      - ./service-api/storage/images/:/opt/underpost/images/
+#    networks:
+#      underpostnet:
+#        ipv4_address: 192.168.60.2
+    ports:
+      - 3000:8078
+    deploy:
+      endpoint_mode: vip
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 400M
+  
+  ui:
+    image: underpost_ui
+    container_name: underpost_app
+    hostname: underpost-app    
+    build:
+      context: ./service-ui
+      dockerfile: ./Dockerfile
+      #args:
+        #- API_HOST_ARG=http://localhost
+        #- API_PORT_ARG=3000  
+#    networks:
+#      underpostnet:
+#        ipv4_address: 192.168.60.4
+    ports:
+      - 3080:80
+    deploy:
+      endpoint_mode: vip
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 400M    
+
+#networks:
+#  underpostnet:
+#    driver: bridge
+#    name: underpostnet
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 192.168.60.0/24

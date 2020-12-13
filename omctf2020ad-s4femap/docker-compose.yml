@@ -1,0 +1,60 @@
+version: '3.7'
+services:
+  api:
+    image: s4femap
+    container_name: s4femap_api
+    hostname: s4femap_api    
+    build:
+      context: ./service-api
+      dockerfile: ./Dockerfile
+    environment:             
+      - INIT=no #yes|no - create not empty database with shelters
+    volumes:
+      - ./service-api/storage/db/:/opt/s4femap/db/
+      - ./service-api/storage/data/:/opt/s4femap/data/      
+#    networks:
+#      s4femapnet:
+#        ipv4_address: 192.168.50.3
+#        aliases:
+#          - s4femap
+    ports:
+      - 3001:8079
+    deploy:
+      endpoint_mode: vip
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 400M
+  
+  ui:
+    image: s4femap_ui
+    container_name: s4femap_app
+    hostname: s4femap_app    
+    build:
+      context: ./service-ui
+      dockerfile: ./Dockerfile
+      #args:
+        #- API_HOST_ARG=http://localhost
+        #- API_PORT_ARG=3001
+#    networks:
+#      s4femapnet:
+#        ipv4_address: 192.168.50.4
+#        aliases:
+#          - s4femap-ui
+    ports:
+      - 3081:80
+    deploy:
+      endpoint_mode: vip
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 400M  
+
+#networks:
+#  s4femapnet:
+#    driver: bridge
+#    name: s4femapnet
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 192.168.50.0/24

@@ -1,0 +1,56 @@
+{% block body %}
+
+<link rel="stylesheet" href="/templates/css/main.css">
+<link rel="stylesheet" href="/templates/css/post.css">
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>FlyMon</h2>
+        <ul>
+          <li><a href="/dashboard"><i class="fas fa-home"></i>Dashboard</a></li>
+          <li><a href="/users"><i class="fas fa-user"></i>Users</a></li>
+          <li><a href="/tables"><i class="fas fa-address-card"></i>Tables</a></li>
+          <li><a href="/add_monitoring"><i class="fas fa-project-diagram"></i>Create Host</a></li>
+          <li><a href="/profile"><i class="fas fa-address-card"></i>Profile</a></li>
+          <li><a href="/logout"><i class="fas fa-project-diagram"></i>Logout</a></li>
+        </ul>
+        <div class="social_media">
+           <b>OmCTF 2020</b>
+      </div>
+    </div>
+<div class="main_content">
+  <h3 class="background double"><span>Create host</span></h3>
+       	<form id="add_monitoring" method="POST" action="" autocomplete="off">
+        <fieldset>
+          <input id="hostname" type="text" name="hostname" placeholder={{request.form.hostname}} 'Hostname'>
+          <label for="hostname">Hostname</label>
+          <div class="after"></div>
+        </fieldset>
+        <fieldset>
+          <input id="type" type="text" name="type" placeholder={{request.form.type}} 'Type'>
+          <label for="type">Type</label>
+          <div class="after"></div>
+        </fieldset>
+        <fieldset>
+          <input id="timeout" type="text" name="timeout" placeholder={{request.form.timeout}} 'Timeout'>
+          <label for="timeout">Timeout</label>
+          <div class="after"></div>
+        </fieldset>
+        <fieldset>
+          <input id="agent" type="text" name="agent" placeholder={{request.form.agent}} 'Agent'>
+          <label for="agent">Agent</label>
+          <div class="after"></div>
+        </fieldset>
+  <!--      <fieldset>
+          <input id="creator" type="text" name="creator" placeholder={{request.form.creator}} 'Creator'>
+          <label for="creator">Creator</label>
+          <div class="after"></div>
+        </fieldset>
+-->
+        <fieldset>
+          <button>Submit</button>
+        </fieldset>
+      </form>
+      </div>
+  </div>
+
+{% endblock %}

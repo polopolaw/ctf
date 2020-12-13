@@ -1,0 +1,46 @@
+{% block body %}
+<link rel="stylesheet" href="/templates/css/left.css">
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>FlyMon</h2>
+        <ul>
+          <li><a href="/dashboard"><i class="fas fa-home"></i>Dashboard</a></li>
+          <li><a href="/users"><i class="fas fa-user"></i>Users</a></li>
+          <li><a href="/tables"><i class="fas fa-address-card"></i>Tables</a></li>
+          <li><a href="/add_monitoring"><i class="fas fa-project-diagram"></i>Create Host</a></li>
+          <li><a href="/profile"><i class="fas fa-address-card"></i>Profile</a></li>
+          <li><a href="/logout"><i class="fas fa-project-diagram"></i>Logout</a></li>
+        </ul>
+        <div class="social_media">
+           <b>OmCTF 2020</b>
+      </div>
+    </div>
+    <div class="main_content">
+      <h3 class="background double"><span>Table Hosts</span></h3>
+      <table>
+        <thead>
+          <tr>
+
+            <th>Hostname</th>
+            <th>Type</th>
+            <th>Timeout</th>
+            <th>Agent</th>
+      	  <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for table in tables %}
+          <tr>
+     <td data-column="Hostname">{{table[1]}}</td>
+     <td data-column="Type">{{table[2]}}</td>
+     <td data-column="Timeout"> {{table[3]}}</td>
+     <td data-column="Agent">{{table[4]}}</td>
+     <td data-column="Creator">{{table[5]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    	</div>
+      </div>
+
+{% endblock %}
